@@ -1,56 +1,65 @@
-@extends('layouts.app')
+@extends('../app')
 
 @section('content')
-<main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
-    <div class="flex">
-        <div class="w-full">
+    <div class="flex h-screen bg-gray-200 p-4 rotate">
+        <div class="sm:max-w-xl md:max-w-2xl w-full m-auto">
 
             @if (session('status'))
-            <div class="text-sm text-green-700 bg-green-100 px-5 py-6 sm:rounded sm:border sm:border-green-400 sm:mb-6"
-                role="alert">
-                {{ session('status') }}
-            </div>
+                <div
+                    class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100 px-3 py-4 mb-4"
+                    role="alert">
+                    {{ session('status') }}
+                </div>
             @endif
 
-            <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                    {{ __('Reset Password') }}
-                </header>
-
-                <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('password.email') }}">
-                    @csrf
-
-                    <div class="flex flex-wrap">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('E-Mail Address') }}:
-                        </label>
-
-                        <input id="email" type="email"
-                            class="form-input w-full @error('email') border-red-500 @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                        @error('email')
-                        <p class="text-red-500 text-xs italic mt-4">
-                            {{ $message }}
-                        </p>
-                        @enderror
-                    </div>
-
-                    <div class="flex flex-wrap justify-center items-center space-y-6 pb-6 sm:pb-10 sm:space-y-0 sm:justify-between">
-                        <button type="submit"
-                        class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:w-auto sm:px-4 sm:order-1">
-                            {{ __('Send Password Reset Link') }}
-                        </button>
-
-                        <p class="mt-4 text-xs text-blue-500 hover:text-blue-700 whitespace-no-wrap no-underline hover:underline sm:text-sm sm:order-0 sm:m-0">
-                            <a class="text-blue-500 hover:text-blue-700 no-underline" href="{{ route('login') }}">
-                                {{ __('Back to login') }}
-                            </a>
+            <form method="POST" action="{{ route('password.email') }}"
+                  class="flex items-stretch bg-white rounded-lg shadow-lg overflow-hidden border-t-4 border-indigo-500 sm:border-0">
+                @csrf
+                <div
+                    class="flex hidden overflow-hidden relative sm:block w-5/12 md:w-6/12 bg-gray-600 text-gray-300 py-4 bg-cover bg-center"
+                    style="background-image: url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')">
+                    <div class="flex-1 absolute bottom-0 text-white p-10">
+                        <h3 class="text-2xl font-bold inline-block">Reset Password</h3>
+                        <p class="text-gray-500 whitespace-no-wrap">
+                            Forgotten Password? No prob!
                         </p>
                     </div>
-                </form>
-            </section>
+                    <svg class="absolute animate h-full w-4/12 sm:w-2/12 right-0 inset-y-0 fill-current text-white"
+                         viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                        <polygon points="0,0 100,100 100,0"></polygon>
+                    </svg>
+                </div>
+                <div class="flex-1 p-6 sm:p-10 sm:py-12">
+                    <h3 class="text-xl text-gray-700 font-bold mb-6">
+                        Enter <span class="text-gray-400 font-light">your email below</span></h3>
+
+                    <input id="email" type="email"
+                           class="px-3 w-full py-2 bg-gray-200 border border-gray-200 rounded focus:border-gray-400 focus:outline-none focus:bg-white mb-4 {{ $errors->has('email') ? ' border-red' : '' }}"
+                           name="email" value="{{ old('email') }}" required placeholder="Email Address">
+
+                    @if ($errors->has('email'))
+                        <p class="text-red-500 text-xs italic mb-4">
+                            {{ $errors->first('email') }}
+                        </p>
+                    @endif
+
+
+                    <div class="flex flex-wrap items-center">
+                        <div class="w-full sm:flex-1">
+                            <input type="submit" value="Send Password Reset Link"
+                                   class="w-full sm:w-auto bg-indigo-500 text-indigo-100 px-6 py-2 rounded hover:bg-indigo-600 focus:outline-none cursor-pointer">
+                        </div>
+                    </div>
+
+                    <p class="w-full text-normal text-left text-grey-dark mt-8">
+                        <a class="text-blue-500 hover:text-blue-700 no-underline" href="{{ route('login') }}">
+                            Back to login
+                        </a>
+                    </p>
+
+                </div>
+            </form>
         </div>
     </div>
-</main>
+    </div>
 @endsection

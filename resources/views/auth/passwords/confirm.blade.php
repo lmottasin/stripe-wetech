@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('../app')
 
 @section('content')
 <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">

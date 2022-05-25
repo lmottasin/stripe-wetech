@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-Auth::routes();
+
+Route::get('logout', function(){
+    Auth::logout();
+    return redirect('/');
+});
+
+Auth::routes(['verify' => true]);
+
+Route::group(['middleware' => ['auth', 'verified']], function(){
+    Route::get('dashboard', function(){
+        echo 'Welcome to your dashboard<br>';
+        echo '<a href="/logout">Logout</a>';
+    });
+});
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

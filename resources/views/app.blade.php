@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LP1 - Landing Page 1</title>
+    <title>@yield('title')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Small CSS to Hide elements at 1520px size -->
     <style>
@@ -28,7 +28,9 @@
 </head>
 
 <body class="antialiased overflow-x-hidden">
+@include('partials.nav')
 @yield('content')
+
 
 
 </body>
