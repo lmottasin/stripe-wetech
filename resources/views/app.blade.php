@@ -28,10 +28,12 @@
 </head>
 
 <body class="antialiased overflow-x-hidden">
+
 @include('partials.nav')
+
 @yield('content')
 
-
+<script src="{{asset('js/custom.js')}}"></script>
 
 </body>
 </html>

@@ -4,10 +4,6 @@
 
 @section('content')
 
-
-
-
-
     <!-- Hero Section -->
     <section class="font-sans container m-auto flex px-5">
 

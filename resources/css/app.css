@@ -9,3 +9,7 @@
     border: solid 2px rgba(59, 130, 246, 0.52);
     outline: none;
 }
+
+#menu-toggle:checked + #menu {
+    display: block;
+}
