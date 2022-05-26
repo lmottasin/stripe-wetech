@@ -29,11 +29,18 @@
                        href="#">Support</a></li>
             </ul>
         </nav>
-        <a href="#" class="lg:ml-4 flex items-center justify-start lg:mb-0 mb-4 pointer-cursor"
+        <a href="#"
+           class="group lg:ml-4 flex items-center justify-start lg:mb-0 mb-4 pointer-cursor border-l border-gray-300 pl-6"
            id="userdropdown">
-            <img
-                class="border-gray-400 rounded-full w-10 h-10 border-2 border-transparent hover:border-pink-400 ignore-body-click"
-                src="{{ Auth::user()->photo }}" alt="avatar">
+            <p class="font-bold text-xs pr-2 text-gray-700 text-right ignore-body-click">{{ auth()->user()->name }}<br>
+                @if(Auth::user()->onTrial())
+                    <span class="text-xs text-teal-500 ignore-body-click">Trial Period</span>
+                @else
+                    <span class="text-xs text-indigo-600 ignore-body-click">{{ ucfirst(auth()->user()->plan->plan_name) }} Plan</span>
+                @endif
+            </p>
+            <img class="rounded-full w-10 h-10 border-2 border-gray-300 group-hover:border-pink-400 ignore-body-click"
+                 src="{{ auth()->user()->photo }}" alt="avatar">
         </a>
         <div id="usermenu"
              class="absolute lg:mt-12 pt-1 z-40 left-0 lg:left-auto lg:right-0 lg:top-0 invisible lg:w-auto w-full">

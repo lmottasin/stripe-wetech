@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Billable;
 
 
 
@@ -25,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'trial_ends_at',
     ];
 
     /**
@@ -44,6 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'trial_ends_at' => 'datetime',
     ];
 
     protected function photo(): Attribute
@@ -51,6 +54,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return Attribute::make(
             get: fn ($value) => is_null($value) ? url('/img/default.png') : Storage::url('images/users/'.$value),
         );
+    }
+
+    public function plan(){
+        return $this->belongsTo(Plan::class);
     }
 
 

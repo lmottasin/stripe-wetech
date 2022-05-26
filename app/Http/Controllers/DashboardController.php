@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileSave;
 use App\Models\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -49,15 +50,20 @@ class DashboardController extends Controller
         return view('settings/security');
     }
     public function security_save(Request $request){
-        return 'Successfully Update you security';
+
+        $user = Auth()->user();
+
+        $request->validate([
+            'password' => 'required|confirmed',
+        ]);
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return back()->with(['alert' => 'Successfully updated your password', 'alert_type' => 'success']);
     }
 
-    public function billing(){
-        return view('settings/billing');
-    }
-    public function billing_save(Request $request){
-        return 'Successfully Update you billing';
-    }
+
     /**
      * Display a listing of the resource.
      *
