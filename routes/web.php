@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,7 +46,8 @@ Route::group(['middleware' => ['auth', 'verified','subscriber']], function(){
     Route::get('settings/billing/cancel', [BillingController::class,'cancel'])->name('cancel');
     Route::get('settings/billing/resume', [BillingController::class,'resume'])->name('resume');
 
-
+    Route::get('support', [SupportController::class,'index'])->name('support');
+    Route::post('support', [SupportController::class,'send'])->name('support.send');
 
 });
 
@@ -55,4 +57,3 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
 });
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

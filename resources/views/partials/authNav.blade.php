@@ -26,7 +26,8 @@
                        href="#">Users</a></li>
                 <li>
                     <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent @if(Request::is('support')){{ 'border-pink-500 text-pink-500 font-bold' }}@else{{ 'text-gray-600 hover:text-gray-900' }}@endif lg:mb-0 mb-2"
-                       href="#">Support</a></li>
+                       href="{{ route('support') }}">Support</a></li>
+
             </ul>
         </nav>
         <a href="#"
