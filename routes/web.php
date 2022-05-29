@@ -39,6 +39,14 @@ Route::group(['middleware' => ['auth', 'verified','subscriber']], function(){
 
     Route::post('settings/billing/switch_plan',[BillingController::class,'switch_plan'])->name('billing.switch_plan');
 
+    Route::get('settings/invoices', [DashboardController::class,'invoices'])->name('invoices');
+    Route::get('settings/invoices/download/{invoice}', [DashboardController::class,'invoices_download'])->name('invoices.download');
+
+    Route::get('settings/billing/cancel', [BillingController::class,'cancel'])->name('cancel');
+    Route::get('settings/billing/resume', [BillingController::class,'resume'])->name('resume');
+
+
+
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function(){

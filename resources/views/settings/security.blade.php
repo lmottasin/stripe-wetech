@@ -1,6 +1,6 @@
 @extends('authApp')
 
-@section('title', 'Dashboard')
+@section('title', 'Security')
 
 @section('content')
 

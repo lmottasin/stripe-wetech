@@ -63,6 +63,24 @@ class DashboardController extends Controller
         return back()->with(['alert' => 'Successfully updated your password', 'alert_type' => 'success']);
     }
 
+    public function invoices(){
+        $invoices = Auth::user()->invoices();
+        return view('settings.invoices',[
+            'invoices'=>$invoices
+        ]);
+    }
+    public function invoices_download(Request $request,$invoiceId){
+        return $request->user()->downloadInvoice($invoiceId, [
+            'vendor' => 'Weteach',
+            'product' => 'Codeshaper',
+        ]);
+    }
+
+    public function cancel(){
+        Auth::user()->subscription('main')->cancel();
+        return back()->with(['alert' => 'Successfully cancelled you account!', 'alert_type' => 'success']);
+    }
+
 
     /**
      * Display a listing of the resource.

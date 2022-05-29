@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Billing;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BillingController extends Controller
 {
@@ -28,6 +29,8 @@ class BillingController extends Controller
             } else {
                 $plan = Plan::where('pricing_api_id', '=', $request->pricing_api_id)->first();
                 $user->plan_id = $plan->id;
+                $user->trial_ends_at = null;
+
                 $user->update();
 
                 $user->newSubscription('main', $request->pricing_api_id)->create($request->payment_method);
@@ -51,6 +54,19 @@ class BillingController extends Controller
             return back()->with(['alert' => 'Sorry, there was an error switching plans.', 'alert_type' => 'error']);
         }
         return back()->with(['alert' => 'Successfully switched your plan', 'alert_type' => 'success']);
+    }
+
+    public function cancel (Request $request) {
+
+        Auth::user()->subscription('main')->cancel();
+        return back()->with(['alert' => 'Successfully cancelled your subscription', 'alert_type' => 'success']);
+
+    }
+
+    public function resume (Request $request) {
+
+        Auth::user()->subscription('main')->resume();
+        return back()->with(['alert' => 'Successfully resumed your subscription', 'alert_type' => 'success']);
     }
 
     /**
