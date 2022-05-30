@@ -58,9 +58,12 @@
                     <div class="flex flex-wrap items-center">
                         <div class="w-full sm:flex-1">
                             <input type="submit" value="Register"
-                                   class="w-full sm:w-auto bg-indigo-500 text-indigo-100 px-6 py-2 rounded hover:bg-indigo-600 focus:outline-none cursor-pointer">
+                                   class="w-full sm:w-auto bg-indigo-500 text-indigo-100 px-6 py-2 rounded-full hover:bg-indigo-600 focus:outline-none cursor-pointer">
                         </div>
                     </div>
+
+                    <p class="text-gray-500 font-medium mt-8 mb-4">or login with</p>
+                    @include('partials.oauth-buttons')
 
                     <p class="w-full text-xs text-left text-gray-700 mt-8">
                         Already have an account?

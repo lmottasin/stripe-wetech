@@ -1,6 +1,6 @@
 @extends('authApp')
 
-@section('title', 'WeTeach - A Course Platform for Developers, built by Developers')
+@section('title', 'Support')
 
 @section('content')
 

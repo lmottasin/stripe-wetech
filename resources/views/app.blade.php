@@ -33,6 +33,8 @@
 
 @yield('content')
 
+@include('partials.footer')
+
 <script src="{{asset('js/custom.js')}}"></script>
 
 </body>

@@ -38,3 +38,33 @@
     @apply bg-indigo-500 text-white text-sm font-medium px-6 py-2 rounded float-right uppercase cursor-pointer;
 }
 
+.activeLink svg, .activeLink span, #nav li.activeLink a:hover svg, #nav li.activeLink a:hover span {
+    color:#677eea;
+    font-weight:bold;
+}
+
+#nav li a:hover svg, #nav li a:hover span{
+    color:#4b5668;
+}
+
+.fa-secondary {
+    opacity:0.4;
+}
+
+.announcement-indicator{
+    left:2px;
+}
+
+.page.p{
+    @apply text-lg text-gray-700 mt-4;
+}
+.page.h2{
+    @apply font-bold text-2xl mt-10 mb-2;
+}
+.page.ul{
+    @apply text-gray-800 list-disc ml-8 my-6;
+}
+.google-blue{
+    background: #4285f4;
+}
+
