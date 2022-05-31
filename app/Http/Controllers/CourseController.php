@@ -13,6 +13,7 @@ class CourseController extends Controller
 
     public function course (Request $request, $subdomain) {
         $course = Course::where('subdomain', '=', $subdomain)->firstOrFail();
+
         return view('course.index', compact('course'));
     }
     /**

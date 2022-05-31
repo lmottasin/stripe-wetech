@@ -12,16 +12,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+Route::domain('{subdomain}.'. env('DOMAIN'))->group(function () {
+    Route::get('/', [CourseController::class,'course']);
+});
+
 
 Route::get('/', function () {
     return view('home');
@@ -60,9 +55,7 @@ Route::group(['middleware' => ['auth', 'verified','subscriber']], function(){
 
 });
 
-Route::domain('{subdomain}.' . env('DOMAIN'))->group(function () {
-    Route::get('/', [CourseController::class,'course']);
-});
+
 
 Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::get('settings/billing',[BillingController::class,'billing'])->name('billing');

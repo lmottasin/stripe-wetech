@@ -20,6 +20,7 @@
                 @foreach(auth()->user()->courses as $course)
                     <div class="border border-gray-300 px-3 py-2 rounded flex justify-between">
                         <span class="font-bold text-indigo-500">{{ $course->name }}</span>
+
                         <a href="{{ str_replace( 'https://', 'https://' . $course->subdomain . '.', url('/')) }}" target="_blank" class="underline text-sm">Preview</a>
 {{--                        <a href="{{ 'https://' . $course->subdomain . '.', url('/') }}" target="_blank" class="underline text-sm">Preview</a>--}}
                     </div>
